@@ -2,8 +2,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 const BorderLinearProgress = withStyles((theme) => ({
     root: {
-      height: 10,
-      borderRadius: 5,
+      height: 15,
+      borderRadius: 1,
     },
     colorPrimary: {
       backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],

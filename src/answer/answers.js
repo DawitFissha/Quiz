@@ -10,19 +10,19 @@ const useStyles = makeStyles({
     },
   });
 
-const Answer = ({answers})=>{
-    const [result,setResult]=useState()
+const Answer = ({answers,answerFunc,result})=>{
+    //const [result,setResult]=useState()
     const classes = useStyles();
-    useEffect(()=>{
+    /*useEffect(()=>{
         setResult(" ");
-        },[answers])
+        },[answers]) */
     const handleAnswer = (e) =>{
     //console.log(e.target.innerText)
        if(decodeURIComponent(answers.correct_answer).toUpperCase()==e.target.innerText){
-            setResult("Correct")
+            answerFunc("Correct")
              }
         else{
-            setResult("Sorry")
+            answerFunc("Sorry")
         }
         }
    if(answers.type=='multiple'){
@@ -65,9 +65,9 @@ const Answer = ({answers})=>{
                     {decodeURIComponent(answers.incorrect_answers[2])}</Button>
                 </Box>
             </Box>
-            <Box mt={4} ml={8}>
+           {/* <Box mt={4} ml={8}>
            <Result result={result}/>
-            </Box>
+            </Box> */}
         </Box>
         
         
@@ -95,9 +95,9 @@ const Answer = ({answers})=>{
             </Button>
         </Box>
     </Box>
-    <Box mt={4} ml={18}>
+   {/* <Box mt={4} ml={18}>
            <Result result={result}/>
-            </Box>
+            </Box> */}
                 </Box>
             </div>
         )
