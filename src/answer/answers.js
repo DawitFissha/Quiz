@@ -17,7 +17,7 @@ const Answer = ({answers})=>{
         setResult(" ");
         },[answers])
     const handleAnswer = (e) =>{
-        //console.log(e.target.innerText)
+    //console.log(e.target.innerText)
        if(decodeURIComponent(answers.correct_answer).toUpperCase()==e.target.innerText){
             setResult("Correct")
              }
@@ -76,8 +76,29 @@ const Answer = ({answers})=>{
     if(answers.type=='boolean'){
         return(
             <div>
-                <Boolean/>
-                <Result result={result}/>
+        <Box display='flex' flexDirection='column'>
+        <Box display="flex">
+        <Box>
+        <Button variant="contained" className={classes.button}
+        onClick={handleAnswer}
+        disabled={result==="Correct" || result=="Sorry"?true:false}
+        >
+            {answers.correct_answer}
+            </Button>
+        </Box>
+        <Box ml={2}>
+        <Button variant="contained" className={classes.button}
+        onClick={handleAnswer}
+        disabled={result==="Correct" || result=="Sorry"?true:false}
+        >
+            {answers.incorrect_answers[0]}
+            </Button>
+        </Box>
+    </Box>
+    <Box mt={4} ml={18}>
+           <Result result={result}/>
+            </Box>
+                </Box>
             </div>
         )
     }
