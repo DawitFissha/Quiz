@@ -8,23 +8,20 @@ import {Box,Paper} from '@material-ui/core'
 import QuizProgress from './progress/quizProgress'
 import Nextq from './answer/nextq'
 import Result from './answer/result'
-var val = 20;
-
-
-//var progressValue=0;
+var score =0
+var min_score=0
+var max_score=100
 function App() {
-  const valueRef=useRef(10)
-  const inc = ()=>{
-   valueRef.current=valueRef.current+10
-    console.log(valueRef.current)
-  }
-
+  
   const [result,setResult]=useState()
   const rightRef = useRef(0)
   const wrongRef = useRef(0)
+ 
   let data = Qdata[0];
   const Qcount=useRef(1);
+  const countRef = useRef(0)
   const [questions,setQuestions]=useState(data);
+
   useEffect(()=>{
     setResult(" ");
     },[questions])
@@ -42,24 +39,20 @@ function App() {
   
   }
 
-  const score = Math.floor((rightRef.current/Qcount.current)*100)
-  const max_score = Math.floor(((rightRef.current+(num_ques-Qcount.current))/num_ques)*100)
-  const min_score = Math.floor((rightRef.current/num_ques)*100)
-  const Next = ()=>{
-    Qcount.current++
+    const Next = ()=>{
+     Qcount.current++
+    countRef.current++
+    score = Math.floor(((rightRef.current)/(Qcount.current-1))*100)
+    max_score = Math.floor(((rightRef.current+(num_ques-(countRef.current)))/num_ques)*100)
+    min_score = Math.floor((rightRef.current/num_ques)*100)
     setQuestions(Qdata[Qcount.current-1])
-    //progressValue=value
-    console.log(score)
-    console.log(max_score)
-    console.log(min_score)
+    
   }
-  
   const useStyles = makeStyles((theme) => ({
     paper: {
-      //width: '100%',
       minWidth: 600,
       minHeight:500,
-      maxHeight:550,
+      maxHeight:800,
     },
     progress: {
       padding: theme.spacing(1),
@@ -67,7 +60,7 @@ function App() {
       border: '1px solid',
       borderRadius:'10px',
       height:'12px',
-      background:`linear-gradient(to right,#000000, #000000 ${min_score}% , #a9a9a9 ${min_score}%,#a9a9a9 ${score}% ,#dcdcdc 0% ${score}%)`
+      background:`linear-gradient(to right,#000000, #000000 ${min_score}% , #a9a9a9 ${min_score}%,#a9a9a9 ${score}% ,#dcdcdc ${score}% ${max_score}% ,#FFFFFF ${max_score}%)`
       
     },
   }));
@@ -95,15 +88,21 @@ function App() {
       <Box ml={18} pb={1}>
                <Nextq next={Next} count={Qcount.current} max={num_ques}/>
             </Box>
+            <Box display = 'flex' pb={1/8}>
+              <Box flexGrow={1} ml={1}>
+                <h3>{`Score ${score}%`}</h3>
+              </Box>
+              <Box mr={1}>
+                <h3>{`Max Score ${max_score}%`}</h3>
+              </Box>
+            </Box>
             <Box ml = {1} pb={1} mt={2} pr={1} >
               <div className ={classes.progress}></div>
             </Box>
             
       </Paper>   
       </Box>
-     
-
-    </div>
+      </div>
   );
 }
 
