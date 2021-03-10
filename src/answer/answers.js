@@ -1,23 +1,16 @@
 import {Button,Box,Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import {useRef,useState,useEffect} from 'react';
-import Result from './result'
-
 const useStyles = makeStyles({
     button: {
-      //width: '100%',
       minWidth: 200,
     },
   });
 
 const Answer = ({answers,answerFunc,result})=>{
-    //const [result,setResult]=useState()
+    
     const classes = useStyles();
-    /*useEffect(()=>{
-        setResult(" ");
-        },[answers]) */
     const handleAnswer = (e) =>{
-    //console.log(e.target.innerText)
+    
        if(decodeURIComponent(answers.correct_answer).toUpperCase()==e.target.innerText){
             answerFunc("Correct")
              }
@@ -65,9 +58,6 @@ const Answer = ({answers,answerFunc,result})=>{
                     {decodeURIComponent(answers.incorrect_answers[2])}</Button>
                 </Box>
             </Box>
-           {/* <Box mt={4} ml={8}>
-           <Result result={result}/>
-            </Box> */}
         </Box>
         
         
@@ -94,10 +84,7 @@ const Answer = ({answers,answerFunc,result})=>{
             {answers.incorrect_answers[0]}
             </Button>
         </Box>
-    </Box>
-   {/* <Box mt={4} ml={18}>
-           <Result result={result}/>
-            </Box> */}
+            </Box>
                 </Box>
             </div>
         )
